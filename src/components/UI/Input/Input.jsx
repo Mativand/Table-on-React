@@ -3,7 +3,7 @@ import s from './Input.module.css'
 
 const Input = ({value, setValue}) => {
     return (
-        <input type="text" value={value} onChange={(e => setValue(e.target.value)
+        <input placeholder=" Search..." type="text" value={value} onChange={(e => setValue(e.target.value)
         )} className={s.input}/>
     );
 };

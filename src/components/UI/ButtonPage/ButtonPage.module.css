@@ -1,4 +1,11 @@
 .button{
     text-decoration: underline;
     margin: 0 0 0 10px;
+    cursor: pointer;
+
+}
+
+.button__current{
+    color: gold;
+    font-weight: bold;
 }
