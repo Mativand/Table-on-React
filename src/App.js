@@ -7,18 +7,20 @@ import Settings from "./components/Settings/Settings";
 
 function App() {
     const [data, setData] = useState([])
+    const [defaultData, setDefaultData] = useState([])
     const [search, setSearch] = useState('')
     const [optionSort, setOptionSort] = useState('asc')
     const [sortedData, setSortedData] = useState([])
-    console.log(search)
-    useEffect(() => {
-        fetchData()
-    }, [])
 
     async function fetchData() {
         const comments = await PostService.getAll()
         setData(comments)
+        setDefaultData(comments)
     }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     const sortData = (sort) => {
         setSortedData([...data].sort((a, b) => {
@@ -42,8 +44,15 @@ function App() {
     }
 
     useMemo(() => {
-        setData(sortedData.filter(el => el.name.toLowerCase().includes(search)
-        ))
+        if (sortedData.length === 0){
+            setData(defaultData.filter(el => {
+                
+                el.name.toLowerCase().includes(search)
+            }))
+        } else {
+            setData(sortedData.filter(el => el.name.toLowerCase().includes(search)))
+
+        }
     }, [search, sortedData])
 
     return (
